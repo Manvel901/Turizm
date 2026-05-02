@@ -1,0 +1,231 @@
+/* Общий контейнер шапки */
+.header {
+  background-color: #f4f4f4;
+  padding: 60px 60px 80px 60px;
+  position: relative;
+  min-height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  /* overflow: hidden;  <-- ЭТОЙ СТРОКИ НЕ ДОЛЖНО БЫТЬ! */
+}
+
+.container {
+  position: relative;
+  z-index: 2;
+  max-width: 1400px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* --- Типографика --- */
+.title {
+  font-size: 64px;
+  font-weight: 900;
+  line-height: 1.1;
+  margin: 0 0 16px 0; /* ⬇️ Чуть плотнее к подзаголовку */
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.subtitle {
+  font-size: 29px;
+  color: #555;
+  margin: 0 0 40px 0; /* ⬇️ Уменьшил отступ до меню */
+  max-width: 600px;
+  line-height: 1.5;
+}
+
+/* --- Навигация --- */
+/* --- Навигация (STICKY) --- */
+.navContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  width: 100%;
+  
+  /* Плавный переход для всех состояний */
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Состояние "прилипания" */
+.sticky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 12px 40px;
+  
+  /* Фон с размытием */
+  background: rgba(244, 244, 244, 0.98);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  z-index: 1000;
+  
+  /* Убираем скругления и рамку в фиксированном режиме для чистоты */
+  border: none;
+  border-radius: 0;
+  gap: 15px;
+  
+  /* Анимация появления сверху */
+  transform: translateY(0);
+}
+
+.navList {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 8px;
+  border: 2px solid #000;
+  border-radius: 50px;
+  background: transparent;
+  gap: 10px; /* Расстояние между элементами */
+  
+}
+
+.navItem {
+  padding: 0 15px;
+}
+
+/* Ссылки меню с эффектом подчеркивания */
+.navItem a {
+  text-decoration: none; /* Убираем стандартное подчеркивание */
+  color: #000;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  position: relative;
+  padding-bottom: 4px; /* Место для полоски */
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+/*  Эффект черной полоски снизу при наведении */
+.navItem a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%; /* Изначально ширина 0 */
+  height: 2px;
+  background-color: #000;
+  transition: width 0.3s ease; /* Плавное появление */
+}
+
+.navItem a:hover::after {
+  width: 100%; /* При наведении полоска заполняет ширину */
+}
+
+.activeItem {
+  background-color: #000;
+  border-radius: 40px;
+}
+
+.activeItem a {
+  color: #fff;
+}
+
+.activeItem a::after {
+  display: none; /* У активной кнопки полоска не нужна, она уже выделена фоном */
+}
+
+/* --- Кнопка бронирования (СТАТИЧНАЯ) --- */
+.bookButton {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 16px 40px;
+  margin-left: 50px;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 50px;
+  cursor: pointer;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.bookButton:hover {
+  background-color: #222;
+  transform: translateY(-2px);
+}
+
+.activeItem {
+  background-color: #000;
+  border-radius: 40px;
+  transition: transform 0.3s ease; /* Плавность анимации */
+}
+
+.activeItem:hover {
+  transform: scale(1.1); /* Увеличение при наведении */
+}
+
+/* ... стили навигации и ссылки ... */
+
+.bookButton {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 16px 40px;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 50px;
+  cursor: pointer;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: background-color 0.3s, transform 0.3s ease; /* Добавили transform в transition */
+}
+
+.bookButton:hover {
+  background-color: #222;
+  transform: scale(1.1); /* Увеличение при наведении */
+}
+
+/* --- Декор (Уголки и Звезды) --- */
+.corner {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-color: #000;
+  border-style: solid;
+  z-index: 1;
+}
+
+.topLeft { top: 40px; left: 40px; border-width: 4px 0 0 4px; }
+.topRight { top: 40px; right: 40px; border-width: 4px 4px 0 0; }
+.bottomLeft { bottom: 40px; left: 40px; border-width: 0 0 4px 4px; }
+.bottomRight { bottom: 40px; right: 40px; border-width: 0 4px 4px 0; }
+
+.star {
+  position: absolute;
+  font-size: 30px;
+  color: #000;
+  z-index: 1;
+  user-select: none;
+}
+
+.leftStar { top: 45%; left: 8%; transform: rotate(-15deg); }
+.rightStar { top: 35%; right: 12%; font-size: 20px; }
+
+/* Адаптив */
+@media (max-width: 768px) {
+  .header { padding: 40px 20px 60px 20px; }
+  .container { max-width: 100%; }
+  .title { font-size: 36px; }
+  .navList { flex-direction: column; border: none; padding: 0; gap: 5px; }
+  .navItem { padding: 5px 0; }
+  .activeItem { background: none; }
+  .activeItem a { color: #000; font-weight: 900; }
+  .corner { display: none; }
+  .bookButton { padding: 14px 28px; font-size: 13px; }
+}
